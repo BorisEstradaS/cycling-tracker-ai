@@ -7,6 +7,17 @@ from streamlit_folium import st_folium
 from utils.db import get_all_rides, get_ride_by_id
 from utils.ai_analysis import analyze_ride, compare_rides
 
+
+import time
+
+if st.button("🤖 Analizar esta ruta con Gemini", type="primary"):
+    with st.spinner("Consultando a tu coach de IA..."):
+        try:
+            analysis = analyze_ride(ride)
+            st.markdown(analysis)
+        except Exception as e:
+            st.error(f"Error con la API de Gemini: {e}")
+            
 st.set_page_config(
     page_title="🚴 CycleTracker Pro",
     page_icon="🚴",
